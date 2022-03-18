@@ -1,0 +1,14 @@
+main: countries.App
+name: countries
+description: Silly goofy country server plugin
+version: 1.0
+api-version: 1.18
+
+commands:
+  source:
+    description: Links to this plugin's Github page
+    usage: /source
+
+  timevote:
+    description: Vote to set day/night
+    usage: /timevote <day/night/yes/no>
