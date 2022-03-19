@@ -12,3 +12,7 @@ commands:
   timevote:
     description: Vote to set day/night
     usage: /timevote <day/night/yes/no>
+
+  country:
+    description: Add/remove a country
+    usage: /country add <name> <owner> <color-code> or /country remove <name>. All case-sensitive.

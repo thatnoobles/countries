@@ -10,9 +10,9 @@ public class TimeVote
 {
 	private final int VOTE_TIME = 30;
 
-	private VoteType currentVoteType = VoteType.None;
-	private ArrayList<Player> votesFor = new ArrayList<>();
-	private ArrayList<Player> votesAgainst = new ArrayList<>();
+	private static VoteType currentVoteType = VoteType.None;
+	private static ArrayList<Player> votesFor = new ArrayList<>();
+	private static ArrayList<Player> votesAgainst = new ArrayList<>();
 
 	private JavaPlugin plugin = null;
 

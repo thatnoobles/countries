@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import countries.customnames.CountryInfo;
+
 public class PlayerJoinQuitListener implements Listener
 {
 	// Lists containing custom join/quit messages. "{p}" is replaced with the player's name when player joins/quits
@@ -59,7 +61,22 @@ public class PlayerJoinQuitListener implements Listener
 		message += joinMessages.get(random.nextInt(joinMessages.size())).replace("{p}", event.getPlayer().getName());
 		event.setJoinMessage(message);
 
-		event.getPlayer().sendMessage();
+		// Also set player name in the tab menu and whatnot
+		CountryInfo countryInfo = CountryInfo.searchByOwner(event.getPlayer().getName());
+		
+		try
+		{
+			event.getPlayer().setDisplayName("§8[§" + countryInfo.getColorCode() + countryInfo.getName() + "§8] §f" + countryInfo.getOwner());
+			event.getPlayer().setPlayerListName("§8[§" + countryInfo.getColorCode() + countryInfo.getName() + "§8] §f" + countryInfo.getOwner());
+		}
+		catch (Exception e)
+		{
+			event.getPlayer().setDisplayName("§8[§fMaidenless§8] §f" + event.getPlayer().getName());
+			event.getPlayer().setPlayerListName("§8[§fMaidenless§8] §f" + event.getPlayer().getName());
+		}
+
+		// Set tab footer
+		event.getPlayer().setPlayerListHeaderFooter("§6§kw§r §eMC Countries 2! §6§kw\n", "§7\n" + event.getPlayer().getServer().getOnlinePlayers().size() + " player(s) here");
 	}
 
 	@EventHandler
@@ -71,5 +88,8 @@ public class PlayerJoinQuitListener implements Listener
 		// Replace "{p}" with the player's name and add it to the message
 		message += quitMessages.get(random.nextInt(quitMessages.size())).replace("{p}", event.getPlayer().getName());
 		event.setQuitMessage(message);
+
+		// Set tab footer
+		event.getPlayer().setPlayerListHeaderFooter("§6§kw§r §eMC Countries 2! §6§kw\n", "§7\n" + event.getPlayer().getServer().getOnlinePlayers().size() + " player(s) here");
 	}
 }
