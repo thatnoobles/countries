@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -30,7 +31,12 @@ public class PlayerJoinQuitListener implements Listener
 	   "Who invited {p}????",
 	   "{p} is here :)",
 	   "{p} is fashionably late",
-	   "{p} arrived, what crimes will they commit??"
+	   "{p} arrived, what crimes will they commit??",
+	   "Who is {p} why are they in my Minecraft world",
+	   "{p} is here for world domination",
+	   "Looks like {p} remembered their Minecraft password",
+	   "{p} appeared out of nowhere",
+	   "Let's say, hypothetically, {p} joined the server"
 	));
 
 	private ArrayList<String> quitMessages = new ArrayList<>(Arrays.asList(
@@ -75,8 +81,11 @@ public class PlayerJoinQuitListener implements Listener
 			event.getPlayer().setPlayerListName("§8[§fMaidenless§8] §f" + event.getPlayer().getName());
 		}
 
-		// Set tab footer
-		event.getPlayer().setPlayerListHeaderFooter("§6§kw§r §eMC Countries 2! §6§kw\n", "§7\n" + event.getPlayer().getServer().getOnlinePlayers().size() + " player(s) here");
+		// Set tab footer for all players
+		for (Player player : event.getPlayer().getServer().getOnlinePlayers())
+		{
+			player.setPlayerListHeaderFooter("§6§kw§r §eMC Countries 2! §6§kw\n", "§7\n" + event.getPlayer().getServer().getOnlinePlayers().size() + " player(s) here");
+		}
 	}
 
 	@EventHandler
@@ -89,7 +98,10 @@ public class PlayerJoinQuitListener implements Listener
 		message += quitMessages.get(random.nextInt(quitMessages.size())).replace("{p}", event.getPlayer().getName());
 		event.setQuitMessage(message);
 
-		// Set tab footer
-		event.getPlayer().setPlayerListHeaderFooter("§6§kw§r §eMC Countries 2! §6§kw\n", "§7\n" + event.getPlayer().getServer().getOnlinePlayers().size() + " player(s) here");
+		// Set tab footer for all players
+		for (Player player : event.getPlayer().getServer().getOnlinePlayers())
+		{
+			player.setPlayerListHeaderFooter("§6§kw§r §eMC Countries 2! §6§kw\n", "§7\n" + event.getPlayer().getServer().getOnlinePlayers().size() + " player(s) here");
+		}
 	}
 }

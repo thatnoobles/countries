@@ -6,6 +6,7 @@ import countries.customnames.CountryRegisterCommand;
 import countries.customnames.PlayerChatListener;
 import countries.itemblacklist.ItemBlacklist;
 import countries.joinmessages.PlayerJoinQuitListener;
+import countries.mobspawning.MobSpawningListener;
 import countries.source.SourceCommand;
 import countries.timevote.TimeVoteCommand;
 
@@ -20,6 +21,7 @@ public class App extends JavaPlugin
 
 		getServer().getPluginManager().registerEvents(new PlayerJoinQuitListener(), this);	// Listen for players joining & leaving
 		getServer().getPluginManager().registerEvents(new PlayerChatListener(), this);	// Listen for players chatting
+		getServer().getPluginManager().registerEvents(new MobSpawningListener(), this);	// Listen for creatures spawning
 
 		new ItemBlacklist(this);	// Blacklist specified crafting recipes
 
